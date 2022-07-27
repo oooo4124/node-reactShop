@@ -56,7 +56,7 @@ function UploadProductPage(props) {
     const submitHandler = (event) => {
         event.preventDefault(); // 확인 눌렀을 때 자동적으로 페이지가 refresh 되지 않음
         //간단한 유효성 체크
-        if(!ProdTitle || !Description || !Price || !Continent || !Images){
+        if(!ProdTitle || !Description || !Price || !Continent || Images.length === 0){
             return alert("모든 값을 입력해주세요.")
         }
 

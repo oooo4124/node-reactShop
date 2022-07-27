@@ -42,8 +42,7 @@ function FileUpload(props) {
               width:300, height: 240, border:'1px solid lightgray',
               display:'flex', alignItems:'center', justifyContent:'center'
             }}
-            {...getRootProps()}
-          >
+            {...getRootProps()}>
             <input {...getInputProps()} />
             <PlusOutlined style={{fontSize:'3rem'}}/>
           </div>
