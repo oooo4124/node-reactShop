@@ -8,6 +8,7 @@ import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import UploadProductPage from "./views/UploadProductPage/UploadProductPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
+import DetailProductPage from './views/DetailProductPage/DetailProductPage';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/login" element={Auth(LoginPage, false)} />
           <Route exact path="/register" element={Auth(RegisterPage, false)} />
           <Route exact path="/product/upload" element={Auth(UploadProductPage, true)} />
+          <Route exact path="/product/:productId" element={Auth(DetailProductPage, null)} />
         </Routes>
       </div>
       <Footer />
