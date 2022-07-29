@@ -1,59 +1,67 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-import { Menu } from 'antd';
-import axios from 'axios';
-import {USER_SERVER} from '../../../Config';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Menu, Badge } from "antd";
+import axios from "axios";
+import { USER_SERVER } from "../../../Config";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 function RightMenu(props) {
-  const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  
-
   const logoutHandler = () => {
-    axios.get(`${USER_SERVER}/logout`).then(response => {
+    axios.get(`${USER_SERVER}/logout`).then((response) => {
       if (response.status === 200) {
         navigate("/login");
       } else {
-        alert('Log Out Failed')
+        alert("Log Out Failed");
       }
     });
   };
 
-  const menuHandler = (MenuItem) =>{
-    if(MenuItem.key === 'logout'){
+  const menuHandler = (MenuItem) => {
+    if (MenuItem.key === "logout") {
       logoutHandler();
-    }else{
-    navigate(MenuItem.key)
+    } else {
+      navigate(MenuItem.key);
     }
-  }
+  };
 
   const menuItems = [
     {
-      key:'/login',
-      label:'Signin'
+      key: "/login",
+      label: "Signin",
     },
     {
-      key:'/register',
-      label:'Signup',
-    }
+      key: "/register",
+      label: "Signup",
+    },
   ];
   const loginMenuItems = [
     {
-      key:'/product/upload',
-      label:'Upload',
+      key: "/product/upload",
+      label: "Upload",
     },
     {
-      key:'logout',
-      label:'Logout',
+      key: "/user/cart",
+      label: (
+        <Badge count={5}>
+          <ShoppingCartOutlined
+            style={{ fontSize: "25px", marginBottom: "3px" }}
+          />
+        </Badge>
+      ),
     },
-    
+    {
+      key: "logout",
+      label: "Logout",
+    },
   ];
+
   if (user.userData && !user.userData.isAuth) {
     return (
-      
       <Menu mode={props.mode} items={menuItems} onClick={menuHandler}>
         {/* <Menu.Item key="mail">
           <a href="/login">Signin</a>
@@ -61,9 +69,8 @@ function RightMenu(props) {
         <Menu.Item key="app">
           <a href="/register">Signup</a>
         </Menu.Item> */}
-        
       </Menu>
-    )
+    );
   } else {
     return (
       <Menu mode={props.mode} items={loginMenuItems} onClick={menuHandler}>
@@ -71,7 +78,7 @@ function RightMenu(props) {
           <a onClick={logoutHandler}>Logout</a>
         </Menu.Item> */}
       </Menu>
-    )
+    );
   }
 }
 
