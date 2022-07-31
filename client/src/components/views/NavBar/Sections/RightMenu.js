@@ -10,6 +10,8 @@ import { ShoppingCartOutlined } from "@ant-design/icons";
 function RightMenu(props) {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const cartCount = user.userData ? user.userData.cart.length : 0
+  
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then((response) => {
@@ -45,9 +47,13 @@ function RightMenu(props) {
       label: "Upload",
     },
     {
+      key: "/history",
+      label: "History",
+    },
+    {
       key: "/user/cart",
       label: (
-        <Badge count={5}>
+        <Badge count={cartCount}>
           <ShoppingCartOutlined
             style={{ fontSize: "25px", marginBottom: "3px" }}
           />
@@ -62,22 +68,12 @@ function RightMenu(props) {
 
   if (user.userData && !user.userData.isAuth) {
     return (
-      <Menu mode={props.mode} items={menuItems} onClick={menuHandler}>
-        {/* <Menu.Item key="mail">
-          <a href="/login">Signin</a>
-        </Menu.Item>
-        <Menu.Item key="app">
-          <a href="/register">Signup</a>
-        </Menu.Item> */}
-      </Menu>
+      <Menu mode={props.mode} items={menuItems} onClick={menuHandler}/>
+    
     );
   } else {
     return (
-      <Menu mode={props.mode} items={loginMenuItems} onClick={menuHandler}>
-        {/* <Menu.Item key="logout">
-          <a onClick={logoutHandler}>Logout</a>
-        </Menu.Item> */}
-      </Menu>
+      <Menu mode={props.mode} items={loginMenuItems} onClick={menuHandler}/>
     );
   }
 }

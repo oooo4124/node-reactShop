@@ -10,6 +10,7 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
 import DetailProductPage from './views/DetailProductPage/DetailProductPage';
 import CartPage from './views/CartPage/CartPage';
+import HistoryPage from './views/HistoryPage/HistoryPage';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/product/upload" element={Auth(UploadProductPage, true)} />
           <Route exact path="/product/:productId" element={Auth(DetailProductPage, null)} />
           <Route exact path="/user/cart" element={Auth(CartPage, true)} />
+          <Route exact path="/history" element={Auth(HistoryPage, true)} />
         </Routes>
       </div>
       <Footer />
