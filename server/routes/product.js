@@ -112,19 +112,26 @@ router.get("/products_by_id", (req, res) => {
   let type = req.query.type;
   let productIds = req.query.id;
 
-
-  if(type === "array"){
+  if (type === "array") {
     //id=aaaa,bbbb,ccccc 왔을 때
     //productIds = ['aaaa','bbbb','ccccc'] 이런식으로 바꿔준다.
-    let ids = req.query.id.split(',')
-    productIds = ids.map(item => {
-      return item
-    })
+    let ids = req.query.id.split(",");
+    productIds = ids.map((item) => {
+      return item;
+    });
+  } else if (type === "single") {
+    Product.findOneAndUpdate(
+      { _id: productIds },
+      { $inc: { views: 1 } },
+      (err, product) => {
+        if (err) return res.json({ success: false, err });
+      }
+    );
   }
 
-  //productId를 이용해서 DB에서 productId와 같은 상품을 가져온다.
+  // productId를 이용해서 DB에서 productId와 같은 상품을 가져온다.
 
-  Product.find({ _id: {$in: productIds} })
+  Product.find({ _id: { $in: productIds } })
     .populate("writer")
     .exec((err, product) => {
       if (err) return res.state(400).send(err);

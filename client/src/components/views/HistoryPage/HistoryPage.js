@@ -1,8 +1,8 @@
 import React from 'react'
 
 function HistoryPage(props) {
-
     const renderHistory = () => (
+        
         props.user.userData && props.user.userData.history &&
             props.user.userData.history.map((history) => (
 
@@ -12,9 +12,9 @@ function HistoryPage(props) {
                     <td>{item.name}</td>
                     <td>{item.price}</td>
                     <td>{item.quantity}</td>
-                    <td>{item.dateOfPurchase}</td>
+                    <td>{new Date(item.dateOfPurchase).toLocaleString()}</td>
                 </tr>
-                )) 
+                ))
             ))
     )
     return (

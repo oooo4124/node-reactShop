@@ -10,8 +10,6 @@ import { ShoppingCartOutlined } from "@ant-design/icons";
 function RightMenu(props) {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const cartCount = user.userData ? user.userData.cart.length : 0
-  
 
   const logoutHandler = () => {
     axios.get(`${USER_SERVER}/logout`).then((response) => {
@@ -31,49 +29,57 @@ function RightMenu(props) {
     }
   };
 
-  const menuItems = [
-    {
-      key: "/login",
-      label: "Signin",
-    },
-    {
-      key: "/register",
-      label: "Signup",
-    },
-  ];
-  const loginMenuItems = [
-    {
-      key: "/product/upload",
-      label: "Upload",
-    },
-    {
-      key: "/history",
-      label: "History",
-    },
-    {
-      key: "/user/cart",
-      label: (
-        <Badge count={cartCount}>
-          <ShoppingCartOutlined
-            style={{ fontSize: "25px", marginBottom: "3px" }}
-          />
-        </Badge>
-      ),
-    },
-    {
-      key: "logout",
-      label: "Logout",
-    },
-  ];
-
   if (user.userData && !user.userData.isAuth) {
-    return (
-      <Menu mode={props.mode} items={menuItems} onClick={menuHandler}/>
-    
-    );
+    const menuItems = [
+      {
+        key: "/login",
+        label: "Signin",
+      },
+      {
+        key: "/register",
+        label: "Signup",
+      },
+    ];
+    return <Menu mode={props.mode} items={menuItems} onClick={menuHandler} />;
   } else {
+    let loginMenuItems = [];
+    {
+      user.userData && user.userData.role === 1
+        ? (loginMenuItems = [
+            {
+              key: "/product/upload",
+              label: "Upload",
+            },
+            {
+              key: "logout",
+              label: "Logout",
+            },
+          ])
+        : (loginMenuItems = [
+            
+            {
+              key: "/history",
+              label: "History",
+            },
+            {
+              key: "/user/cart",
+              label: (
+                <Badge count={user.userData && user.userData.cart.length}>
+                  <ShoppingCartOutlined
+                    style={{ fontSize: "25px", marginBottom: "3px" }}
+                    
+                  />
+                </Badge>
+              ),
+            },
+            {
+              key: "logout",
+              label: "Logout",
+            },
+          ]);
+    }
     return (
-      <Menu mode={props.mode} items={loginMenuItems} onClick={menuHandler}/>
+      <Menu mode={props.mode} items={loginMenuItems} onClick={menuHandler} />
     );
   }
 }

@@ -9,7 +9,7 @@
 }
 
 .menu__logo {
-  width: 150px;
+  width: 10%;
   float: left;
 }
 
@@ -38,12 +38,17 @@
 
 .menu__container .menu_left {
   float: left;
+  max-width: 200px;
+  width: 100%;
   padding: 10px;
   
 }
 
 .menu__container .menu_rigth {
   float: right;
+  margin-right: auto;
+  max-width: 300px;
+  width: 100%;
   padding: 10px;
 }
 

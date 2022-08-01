@@ -25,7 +25,7 @@ const continents = [
     },
     {
         "_id": 7,
-        "name": "Antrarctica"
+        "name": "Antarctica"
     }
 
 ]

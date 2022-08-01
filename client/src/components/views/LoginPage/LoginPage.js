@@ -123,7 +123,8 @@ function LoginPage(props) {
               </Form.Item>
 
               {formErrorMessage && (
-                <label ><p style={{ color: '#ff0000bf', fontSize: '0.7rem', border: '1px solid', padding: '1rem', borderRadius: '10px' }}>{formErrorMessage}</p></label>
+                
+                <label ><p style={{ color: '#ff0000bf', fontSize: '1rem', border: '1px solid', padding: '3px', borderRadius: '10px' }}>{formErrorMessage}</p></label>
               )}
 
               <Form.Item>
