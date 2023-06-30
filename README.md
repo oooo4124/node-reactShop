@@ -1,4 +1,4 @@
-node, react study
+# node, react study
 
 node 와 react를 사용하여 만든 쇼핑몰입니다.
 
